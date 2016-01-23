@@ -19,7 +19,7 @@ public class StoryListAdapter extends BaseListAdapter<StoryListResult> {
 
 	@Override
 	protected View getItemView(View convertView, int position) {
-		convertView = mInflater.inflate(R.layout.adapter_story_list, null);
+		convertView = mInflater.inflate(R.layout.adapter_travel, null);
 		return convertView;
 	}
 

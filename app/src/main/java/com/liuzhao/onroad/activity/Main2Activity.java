@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 @ContentView(R.layout.activity_main)
-public class Main2Activity extends ActionBarActivity {
+public class Main2Activity extends BaseActivity {
     /** 判断跳转到哪个页面的下标 */
     private int tabpos = 0;
     /** Fragment管理类 */
@@ -35,7 +36,7 @@ public class Main2Activity extends ActionBarActivity {
     @ViewInject(R.id.tv_maintitle)
     private TextView tv_maintitle;
     private ImageView[] imgDots = new ImageView[TAB_COUNT];
-    private String[] titleStrings={"首页","创作","写诗"};
+    private String[] titleStrings={"推荐","话题","写诗"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

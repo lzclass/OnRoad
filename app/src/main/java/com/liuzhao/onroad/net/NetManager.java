@@ -1,7 +1,5 @@
 package com.liuzhao.onroad.net;
 
-import org.apache.http.HttpException;
-import org.apache.http.HttpRequest;
 
 /**
  * @description 网络请求

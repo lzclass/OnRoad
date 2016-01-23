@@ -10,7 +10,7 @@ import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.fragment.NavigationDrawerFragment;
 import com.liuzhao.onroad.fragment.PlaceholderFragment;
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
