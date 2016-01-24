@@ -2,35 +2,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_head"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/tv_head"
+            android:id="@+id/tv_authorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_head"
-            android:layout_toRightOf="@+id/iv_head" />
+            android:layout_toRightOf="@+id/iv_head"
+            android:text="村上十四郎" />
 
         <TextView
             android:id="@+id/tv_datetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_head"
+            android:layout_below="@+id/tv_authorName"
             android:layout_toRightOf="@+id/iv_head" />
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/iv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_launcher"
+        android:maxHeight="25dp"
+        android:maxWidth="25dp" />
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="标题" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="内容2143it9jafijaigjosfjaierofjo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_readCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阅103" />
+
+        <TextView
+            android:id="@+id/tv_supportCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赞234" />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评22" />
+
+        <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏20" />
+
+        <TextView
+            android:id="@+id/tv_rewardCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="赏20" />
+    </LinearLayout>
 </LinearLayout>
