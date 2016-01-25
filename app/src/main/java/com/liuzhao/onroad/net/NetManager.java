@@ -1,13 +1,16 @@
 package com.liuzhao.onroad.net;
 
 
-import org.xutils.common.Callback;
 import org.xutils.common.Callback.CommonCallback;
 import org.xutils.common.util.LogUtil;
+import org.xutils.http.HttpMethod;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import javax.net.ssl.SSLSocketFactory;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author liuzhao
@@ -17,22 +20,34 @@ import javax.net.ssl.SSLSocketFactory;
 public enum NetManager {
     INSTANCE;
 
-    private NetManager() {
+    NetManager() {
 
     }
 
-    private static void buildParams(RequestParams params) {
-
+    private static void buildParams(RequestParams params, HashMap<String, String> map) {
+        //如果是登录，增加头部参数
+        if (map.get(NetConstants.MESSAGENAME).equals(NetConstants.LOGIN)) {
+            Apn.addHeads(map);
+        }
+        Set<Map.Entry<String, String>> entrySet = map.entrySet();
+        Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            if (entry.getKey() != NetConstants.MESSAGEGROUP) {
+                params.addBodyParameter(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
-    public static void doGetHttp(RequestParams params, NetCommonCallback netCommonCallback)
 
-    {
-        buildParams(params);
-        params = new RequestParams("https://www.baidu.com/s");
+    public static void doGetHttp(HashMap<String, String> map, NetCommonCallback netCommonCallback) {
+
+        RequestParams params = new RequestParams(NetConstants.HOST_URL);
+        buildParams(params, map);
+        params.setMethod(HttpMethod.GET);
+        LogUtil.d("接口URL：" + NetConstants.HOST_URL + params.toString());
 
 //      params.setSslSocketFactory(); // 设置ssl
-        params.addQueryStringParameter("wd", "xUtils");
         x.http().get(params, netCommonCallback);
     }
 
