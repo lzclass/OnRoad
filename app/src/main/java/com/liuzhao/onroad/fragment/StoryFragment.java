@@ -10,9 +10,10 @@ import android.view.ViewGroup;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.adapter.StoryListAdapter;
-import com.liuzhao.onroad.entity.StoryListResult;
+import com.liuzhao.onroad.entity.Article;
 import com.liuzhao.onroad.view.listview.XListView;
 
+import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -23,13 +24,14 @@ import java.util.List;
  * @description
  * @date 2015-12-8下午3:37:46
  */
+@ContentView(R.layout.fragment_story)
 public class StoryFragment extends BaseFragment {
     @ViewInject(R.id.swipe_container)
     private SwipeRefreshLayout mSwipeLayout;
     @ViewInject(R.id.lv_story)
     private XListView lv_story;
     private StoryListAdapter storyListAdapter;
-    private List<StoryListResult> list;
+    private List<Article> list;
 
     public static final StoryFragment newInstance() {
         StoryFragment fragment = new StoryFragment();
@@ -37,21 +39,24 @@ public class StoryFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        rootView = inflater.inflate(R.layout.fragment_story, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initView();
-        list = new ArrayList<StoryListResult>();
+        list = new ArrayList<Article>();
         for(int i = 0;i<10;i++){
-            StoryListResult result = new StoryListResult();
+            Article result = new Article();
             result.setAuthor("作者");
+            list.add(result);
         }
-        storyListAdapter = new StoryListAdapter(mActivity, list);
+        storyListAdapter = new StoryListAdapter(getActivity(), list);
         lv_story.setAdapter(storyListAdapter);
         lv_story.setPullLoadHide();
         lv_story.setPullRefreshEnable(false);
-        return rootView;
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -61,15 +66,13 @@ public class StoryFragment extends BaseFragment {
     }
 
     private void initView() {
-        mSwipeLayout = (SwipeRefreshLayout) rootView
-                .findViewById(R.id.swipe_container);
-        lv_story = (XListView) rootView.findViewById(R.id.lv_story);
+
         // 设置下拉圆圈上的颜色
         mSwipeLayout.setColorSchemeResources(R.color.holo_blue_bright,
                 R.color.holo_green_light, R.color.holo_orange_light,
                 R.color.holo_red_light);
         mSwipeLayout.setDistanceToTriggerSync(400);// 设置手指在屏幕下拉多少距离会触发下拉刷新
-        mSwipeLayout.setProgressBackgroundColor(whiteColor); // 设定下拉圆圈的背景
+        mSwipeLayout.setProgressBackgroundColorSchemeResource(whiteColor);// 设定下拉圆圈的背景
         mSwipeLayout.setSize(SwipeRefreshLayout.DEFAULT); // 设置圆圈的大小
 
         mSwipeLayout.setOnRefreshListener(new OnRefreshListener() {
