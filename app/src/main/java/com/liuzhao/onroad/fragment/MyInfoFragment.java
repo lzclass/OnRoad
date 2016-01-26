@@ -1,6 +1,7 @@
 package com.liuzhao.onroad.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.liuzhao.onroad.R;
 
@@ -12,6 +13,8 @@ import org.xutils.view.annotation.ContentView;
  */
 @ContentView(R.layout.fragment_my_info)
 public class MyInfoFragment extends BaseFragment {
+
+    private RecyclerView rv_menu;
 
     public static final MyInfoFragment newInstance() {
         MyInfoFragment fragment = new MyInfoFragment();

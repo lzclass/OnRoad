@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.adapter.StoryListAdapter;
 import com.liuzhao.onroad.entity.Article;
-import com.liuzhao.onroad.view.listview.XListView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -29,7 +27,7 @@ public class StoryFragment extends BaseFragment {
     @ViewInject(R.id.swipe_container)
     private SwipeRefreshLayout mSwipeLayout;
     @ViewInject(R.id.lv_story)
-    private XListView lv_story;
+    private ListView lv_story;
     private StoryListAdapter storyListAdapter;
     private List<Article> list;
 
@@ -39,7 +37,8 @@ public class StoryFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView();
         list = new ArrayList<Article>();
         for(int i = 0;i<10;i++){
@@ -49,20 +48,11 @@ public class StoryFragment extends BaseFragment {
         }
         storyListAdapter = new StoryListAdapter(getActivity(), list);
         lv_story.setAdapter(storyListAdapter);
-        lv_story.setPullLoadHide();
-        lv_story.setPullRefreshEnable(false);
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     private void initView() {
@@ -85,7 +75,7 @@ public class StoryFragment extends BaseFragment {
                         // 获得数据停止刷新
                         mSwipeLayout.setRefreshing(false);
                     }
-                }, 5000);
+                }, 3000);
             }
         });
     }

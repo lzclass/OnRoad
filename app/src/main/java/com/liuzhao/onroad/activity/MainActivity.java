@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 
 import com.liuzhao.onroad.R;
+import com.liuzhao.onroad.fragment.HomePageFragment;
 import com.liuzhao.onroad.fragment.NavigationDrawerFragment;
 import com.liuzhao.onroad.fragment.PlaceholderFragment;
 import com.liuzhao.onroad.fragment.StoryFragment;
@@ -15,6 +16,7 @@ public class MainActivity extends BaseActivity
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +40,12 @@ public class MainActivity extends BaseActivity
         switch (position) {
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position))
+                        .replace(R.id.container, HomePageFragment.newInstance())
                         .commit();
                 break;
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, StoryFragment.newInstance())
+                        .replace(R.id.container, PlaceholderFragment.newInstance(position))
                         .commit();
                 break;
             case 3:

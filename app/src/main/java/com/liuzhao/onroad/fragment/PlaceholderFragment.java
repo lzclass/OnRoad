@@ -49,6 +49,12 @@ public class PlaceholderFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        for (int i=0;i<10;i++){
+            Article article = new Article();
+            article.setAuthor("静默山水间");
+            article.setTitle("空谷幽兰");
+            article.setHeadPic("http://pic2.ooopic.com/01/03/51/25b1OOOPIC19.jpg");
+        }
         adapter = new TravelListAdapter(getActivity(), list);
         xlv_content.setAdapter(adapter);
         Bundle args = new Bundle();

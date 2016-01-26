@@ -1,13 +1,12 @@
 package com.liuzhao.onroad.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import java.util.List;
 
 /**
  * @param <T>
@@ -18,16 +17,14 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     protected final String TAG = this.getClass().getSimpleName();
 
     protected Context mContext;
-    protected List<T> mValues = null;
-    protected String mRemark;
+    protected List<T> mValues;
     protected LayoutInflater mInflater;
 
     public BaseListAdapter(Context context, List<T> values) {
         mContext = context;
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mValues = new ArrayList<T>();
-        mValues.addAll(values);
+        this.mValues = values;
     }
 
     public Context getContext() {
