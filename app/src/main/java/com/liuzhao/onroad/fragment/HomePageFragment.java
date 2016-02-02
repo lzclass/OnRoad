@@ -3,44 +3,35 @@ package com.liuzhao.onroad.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HomePageFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HomePageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+
+@ContentView(R.layout.fragment_home_page)
 public class HomePageFragment extends BaseFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    @ViewInject(R.id.iv_content)
+    private ImageView iv_content;
+    @ViewInject(R.id.tv_pic_no)
+    private TextView tv_pic_no;
+    @ViewInject(R.id.tv_pic_author)
+    private TextView tv_pic_author;
+    @ViewInject(R.id.tv_home_content)
+    private TextView tv_home_content;
+    @ViewInject(R.id.tv_home_author)
+    private TextView tv_home_author;
+    @ViewInject(R.id.tv_date)
+    private TextView tv_date;
     private OnFragmentInteractionListener mListener;
 
     public HomePageFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment HomePageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static HomePageFragment newInstance() {
         HomePageFragment fragment = new HomePageFragment();
         Bundle args = new Bundle();
@@ -51,18 +42,9 @@ public class HomePageFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false);
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
