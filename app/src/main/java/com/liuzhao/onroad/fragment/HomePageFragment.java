@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 @ContentView(R.layout.fragment_home_page)
 public class HomePageFragment extends BaseFragment {
@@ -45,6 +47,9 @@ public class HomePageFragment extends BaseFragment {
 
     }
 
+    private void initDate() {
+        x.image().bind(iv_content,"http://img.taopic.com/uploads/allimg/130529/240454-13052ZR31446.jpg",ImageOptions.DEFAULT);
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

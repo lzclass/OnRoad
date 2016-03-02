@@ -1,7 +1,6 @@
 package com.liuzhao.onroad.net;
 
 
-import org.xutils.common.Callback.CommonCallback;
 import org.xutils.common.util.LogUtil;
 import org.xutils.http.HttpMethod;
 import org.xutils.http.RequestParams;
@@ -26,51 +25,31 @@ public enum NetManager {
 
     private static void buildParams(RequestParams params, HashMap<String, String> map) {
         //如果是登录，增加头部参数
-        if (map.get(NetConstants.MESSAGENAME).equals(NetConstants.LOGIN)) {
-            Apn.addHeads(map);
-        }
+//        if (map.get(NetConstants.MESSAGENAME).equals(NetConstants.LOGIN)) {
+//            Apn.addHeads(map);
+//        }
+
         Set<Map.Entry<String, String>> entrySet = map.entrySet();
         Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
-            if (entry.getKey() != NetConstants.MESSAGEGROUP) {
+            if (entry.getKey() != NetConstants.METHOD) {
                 params.addBodyParameter(entry.getKey(), entry.getValue());
             }
         }
     }
 
 
-    public static void doGetHttp(HashMap<String, String> map, NetCommonCallback netCommonCallback) {
+    public <T> void doGetHttp(HashMap<String, String> map, NetCommonCallback netCommonCallback) {
 
-        RequestParams params = new RequestParams(NetConstants.HOST_URL);
+        String method = map.get(NetConstants.METHOD);
+        RequestParams params = new RequestParams(NetConstants.HOST_URL_JUHE + method);
         buildParams(params, map);
         params.setMethod(HttpMethod.GET);
-        LogUtil.d("接口URL：" + NetConstants.HOST_URL + params.toString());
+        LogUtil.d("接口URL：" + NetConstants.HOST_URL_JUHE + params.toString());
 
 //      params.setSslSocketFactory(); // 设置ssl
         x.http().get(params, netCommonCallback);
     }
 
-    public abstract class NetCommonCallback implements CommonCallback<String> {
-
-        @Override
-        public void onSuccess(String result) {
-            LogUtil.d(result);
-        }
-
-        @Override
-        public void onError(Throwable throwable, boolean isOnCallback) {
-            LogUtil.d(throwable.getMessage());
-        }
-
-        @Override
-        public void onCancelled(CancelledException e) {
-            LogUtil.e("onCancelled" + e.getMessage());
-        }
-
-        @Override
-        public void onFinished() {
-
-        }
-    }
 }

@@ -7,8 +7,8 @@ import android.support.v7.app.ActionBar;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.fragment.HomePageFragment;
+import com.liuzhao.onroad.fragment.JokeFragment;
 import com.liuzhao.onroad.fragment.NavigationDrawerFragment;
-import com.liuzhao.onroad.fragment.PlaceholderFragment;
 import com.liuzhao.onroad.fragment.StoryFragment;
 
 public class MainActivity extends BaseActivity
@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity
                 break;
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position))
+                        .replace(R.id.container, JokeFragment.newInstance())
                         .commit();
                 break;
             case 3:
