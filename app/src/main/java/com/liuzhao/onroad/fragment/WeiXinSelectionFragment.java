@@ -1,6 +1,7 @@
 package com.liuzhao.onroad.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.MainActivity;
+import com.liuzhao.onroad.activity.WeiXinDetailActivity;
 import com.liuzhao.onroad.adapter.WeiXinSelectionAdapter;
+import com.liuzhao.onroad.common.IntentConstants;
 import com.liuzhao.onroad.entity.WeiXinSelection;
 import com.liuzhao.onroad.view.listview.XListView;
 
@@ -50,7 +53,7 @@ public class WeiXinSelectionFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        for (int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             WeiXinSelection weiXinSelection = new WeiXinSelection();
             weiXinSelection.setSource("静默山水间");
             weiXinSelection.setTitle("空谷幽兰");
@@ -63,7 +66,11 @@ public class WeiXinSelectionFragment extends BaseFragment {
         xlv_content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(getActivity(),WeiXinDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(IntentConstants.URL,list.get(position).getUrl());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
