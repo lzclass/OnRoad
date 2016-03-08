@@ -27,7 +27,6 @@ public class MainActivity extends BaseActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-        // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
@@ -35,20 +34,19 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position) {
-            case 1:
+            case 0:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, HomePageFragment.newInstance())
                         .commit();
                 break;
-            case 2:
+            case 1:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, JokeFragment.newInstance())
                         .commit();
                 break;
-            case 3:
+            case 2:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, StoryFragment.newInstance())
                         .commit();
@@ -59,13 +57,13 @@ public class MainActivity extends BaseActivity
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.home_page);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.title_section1);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_section2);
                 break;
         }

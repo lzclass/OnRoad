@@ -9,12 +9,14 @@ import android.widget.ListView;
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.BaseActivity;
 import com.liuzhao.onroad.adapter.JokeListAdapter;
+import com.liuzhao.onroad.common.CommonConstants;
 import com.liuzhao.onroad.entity.JokeBean;
 import com.liuzhao.onroad.entity.JokeListResult;
 import com.liuzhao.onroad.net.NetCommonCallback;
 import com.liuzhao.onroad.net.NetConstants;
 import com.liuzhao.onroad.net.NetManager;
 import com.liuzhao.onroad.util.JsonUtils;
+import com.liuzhao.onroad.util.Utils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -33,6 +35,9 @@ public class JokeFragment extends BaseFragment {
     private ListView lv_joke;
     private JokeListAdapter jokeListAdapter;
     private List<JokeBean> list;
+    private int page = 1;
+    private int pageSize = 10;
+    private String time;
 
     public static final JokeFragment newInstance() {
         JokeFragment fragment = new JokeFragment();
@@ -73,22 +78,53 @@ public class JokeFragment extends BaseFragment {
         getData();
     }
 
-
+    //    请求参数说明：
+//    名称 	类型 	必填 	说明
+//    sort 	string 	是 	类型，desc:指定时间之前发布的，asc:指定时间之后发布的
+//    page 	int 	否 	当前页数,默认1
+//    pagesize 	int 	否 	每次返回条数,默认1,最大20
+//    time 	string 	是 	时间戳（10位），如：1418816972
+//    key 	string 	是 	您申请的key
     private void getData() {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(NetConstants.METHOD, NetConstants.JOKE);
+        map.put("sort", "asc");
+        map.put("page", page + "");
+        map.put("pagesize", pageSize + "");
+        map.put("time", time);
+        map.put("key", CommonConstants.JUHE_KEY);
         NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(JokeListResult.class, (BaseActivity) getActivity()) {
             @Override
             public void onSuccess(String result) {
                 super.onSuccess(result);
                 JokeListResult t = JsonUtils.parseJson(result, JokeListResult.class);
-                jokeListAdapter.update(t.getResult().getData());
+                if (t.getResult().getData() == null || t.getResult().getData().size() == 0) {
+                    return;
+                }
+                list = t.getResult().getData();
+                for (int i = 0; i < 10; i++) {
+                    JokeBean bean = new JokeBean();
+                    bean.setContent("我女朋友气跑了＂\r\n＂怎么回事？严重吗？你怎么着她了？＂\r\n＂不严重，我只是很久没用了");
+                    bean.setHashId("03a6095c18e1d6fe7e2c19b2a20d03d1");
+                    bean.setUnixtime("1418814837");
+                    bean.setUpdatetime("2014-12-17 19:13:57");
+                }
+                jokeListAdapter.update(list);
 
             }
 
             @Override
             public void onError(Throwable throwable, boolean isOnCallback) {
                 super.onError(throwable, isOnCallback);
+                Utils.showToast("返回数据错误");
+                for (int i = 0; i < 10; i++) {
+                    JokeBean bean = new JokeBean();
+                    bean.setContent("我女朋友气跑了＂\r\n＂怎么回事？严重吗？你怎么着她了？＂\r\n＂不严重，我只是很久没用了");
+                    bean.setHashId("03a6095c18e1d6fe7e2c19b2a20d03d1");
+                    bean.setUnixtime("1418814837");
+                    bean.setUpdatetime("2014-12-17 19:13:57");
+                }
+                jokeListAdapter.update(list);
             }
 
             @Override

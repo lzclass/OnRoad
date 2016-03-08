@@ -4,12 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.MainActivity;
-import com.liuzhao.onroad.adapter.TravelListAdapter;
-import com.liuzhao.onroad.entity.Article;
+import com.liuzhao.onroad.adapter.WeiXinSelectionAdapter;
+import com.liuzhao.onroad.entity.WeiXinSelection;
 import com.liuzhao.onroad.view.listview.XListView;
 
 import org.xutils.view.annotation.ContentView;
@@ -21,25 +22,25 @@ import java.util.List;
  * Created by liuzhao on 2015/12/17.
  */
 @ContentView(R.layout.fragment_main)
-public class PlaceholderFragment extends BaseFragment {
+public class WeiXinSelectionFragment extends BaseFragment {
 
     @ViewInject(R.id.section_label)
     private TextView section_label;
     @ViewInject(R.id.xlv_content)
     private XListView xlv_content;
-    private TravelListAdapter adapter;
-    private List<Article> list;
+    private WeiXinSelectionAdapter adapter;
+    private List<WeiXinSelection> list;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public PlaceholderFragment() {
+    public WeiXinSelectionFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static PlaceholderFragment newInstance(int sectionNumber) {
-        PlaceholderFragment fragment = new PlaceholderFragment();
+    public static WeiXinSelectionFragment newInstance(int sectionNumber) {
+        WeiXinSelectionFragment fragment = new WeiXinSelectionFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -50,15 +51,21 @@ public class PlaceholderFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         for (int i=0;i<10;i++){
-            Article article = new Article();
-            article.setAuthor("静默山水间");
-            article.setTitle("空谷幽兰");
-            article.setHeadPic("http://pic2.ooopic.com/01/03/51/25b1OOOPIC19.jpg");
+            WeiXinSelection weiXinSelection = new WeiXinSelection();
+            weiXinSelection.setSource("静默山水间");
+            weiXinSelection.setTitle("空谷幽兰");
+            weiXinSelection.setFirstImg("http://pic2.ooopic.com/01/03/51/25b1OOOPIC19.jpg");
         }
-        adapter = new TravelListAdapter(getActivity(), list);
+        adapter = new WeiXinSelectionAdapter(getActivity(), list);
         xlv_content.setAdapter(adapter);
         Bundle args = new Bundle();
         section_label.setText("内容" + args.getInt(ARG_SECTION_NUMBER));
+        xlv_content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     @Override

@@ -42,7 +42,7 @@ public enum NetManager {
 
     public <T> void doGetHttp(HashMap<String, String> map, NetCommonCallback netCommonCallback) {
 
-        String method = map.get(NetConstants.METHOD);
+        Object method = map.get(NetConstants.METHOD);
         RequestParams params = new RequestParams(NetConstants.HOST_URL_JUHE + method);
         buildParams(params, map);
         params.setMethod(HttpMethod.GET);
