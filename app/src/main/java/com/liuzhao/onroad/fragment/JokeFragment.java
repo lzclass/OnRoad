@@ -1,10 +1,8 @@
 package com.liuzhao.onroad.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.ListView;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.BaseActivity;
@@ -17,6 +15,7 @@ import com.liuzhao.onroad.net.NetConstants;
 import com.liuzhao.onroad.net.NetManager;
 import com.liuzhao.onroad.util.JsonUtils;
 import com.liuzhao.onroad.util.Utils;
+import com.liuzhao.onroad.view.listview.XListView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -32,7 +31,7 @@ public class JokeFragment extends BaseFragment {
     @ViewInject(R.id.swipe_container)
     private SwipeRefreshLayout mSwipeLayout;
     @ViewInject(R.id.lv_joke)
-    private ListView lv_joke;
+    private XListView lv_joke;
     private JokeListAdapter jokeListAdapter;
     private List<JokeBean> list;
     private int page = 1;
@@ -45,6 +44,8 @@ public class JokeFragment extends BaseFragment {
     }
 
     private void initView() {
+        lv_joke.setPullRefreshEnable(false);
+        lv_joke.setPullLoadEnable(true);
 
         // 设置下拉圆圈上的颜色
         mSwipeLayout.setColorSchemeResources(R.color.holo_blue_bright,
@@ -58,13 +59,8 @@ public class JokeFragment extends BaseFragment {
 
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 获得数据停止刷新
-                        mSwipeLayout.setRefreshing(false);
-                    }
-                }, 3000);
+                page = 1;
+                getData();
             }
         });
     }
@@ -86,13 +82,14 @@ public class JokeFragment extends BaseFragment {
 //    time 	string 	是 	时间戳（10位），如：1418816972
 //    key 	string 	是 	您申请的key
     private void getData() {
+        time = System.currentTimeMillis() + "";
         HashMap<String, String> map = new HashMap<String, String>();
         map.put(NetConstants.METHOD, NetConstants.JOKE);
-        map.put("sort", "asc");
+        map.put("sort", "desc");
         map.put("page", page + "");
         map.put("pagesize", pageSize + "");
-        map.put("time", time);
-        map.put("key", CommonConstants.JUHE_KEY);
+        map.put("time", time.substring(0, 10));
+        map.put("key", CommonConstants.JUHE_JOKE_KEY);
         NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(JokeListResult.class, (BaseActivity) getActivity()) {
             @Override
             public void onSuccess(String result) {
@@ -102,39 +99,36 @@ public class JokeFragment extends BaseFragment {
                     return;
                 }
                 list = t.getResult().getData();
-                for (int i = 0; i < 10; i++) {
-                    JokeBean bean = new JokeBean();
-                    bean.setContent("我女朋友气跑了＂\r\n＂怎么回事？严重吗？你怎么着她了？＂\r\n＂不严重，我只是很久没用了");
-                    bean.setHashId("03a6095c18e1d6fe7e2c19b2a20d03d1");
-                    bean.setUnixtime("1418814837");
-                    bean.setUpdatetime("2014-12-17 19:13:57");
-                }
+//                for (int i = 0; i < 10; i++) {
+//                    JokeBean bean = new JokeBean();
+//                    bean.setContent("我女朋友气跑了＂\r\n＂怎么回事？严重吗？你怎么着她了？＂\r\n＂不严重，我只是很久没用了");
+//                    bean.setHashId("03a6095c18e1d6fe7e2c19b2a20d03d1");
+//                    bean.setUnixtime("1418814837");
+//                    bean.setUpdatetime("2014-12-17 19:13:57");
+//                }
                 jokeListAdapter.update(list);
+                mSwipeLayout.setRefreshing(false);
 
             }
 
             @Override
             public void onError(Throwable throwable, boolean isOnCallback) {
                 super.onError(throwable, isOnCallback);
-                Utils.showToast("返回数据错误");
-                for (int i = 0; i < 10; i++) {
-                    JokeBean bean = new JokeBean();
-                    bean.setContent("我女朋友气跑了＂\r\n＂怎么回事？严重吗？你怎么着她了？＂\r\n＂不严重，我只是很久没用了");
-                    bean.setHashId("03a6095c18e1d6fe7e2c19b2a20d03d1");
-                    bean.setUnixtime("1418814837");
-                    bean.setUpdatetime("2014-12-17 19:13:57");
-                }
-                jokeListAdapter.update(list);
+                Utils.showToast("onError");
+                mSwipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onCancelled(CancelledException e) {
                 super.onCancelled(e);
+                Utils.showToast("onCancelled");
+                mSwipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onFinished() {
                 super.onFinished();
+                mSwipeLayout.setRefreshing(false);
             }
         });
 

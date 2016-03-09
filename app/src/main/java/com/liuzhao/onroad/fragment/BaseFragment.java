@@ -1,6 +1,7 @@
 package com.liuzhao.onroad.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +25,13 @@ public class BaseFragment extends Fragment {
     }
 
     private boolean injected = false;
+    protected Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext =context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

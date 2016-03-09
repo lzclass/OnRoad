@@ -2,10 +2,12 @@ package com.liuzhao.onroad.activity;
 
 import android.app.Application;
 
+import com.liuzhao.onroad.common.CommonConstants;
 import com.liuzhao.onroad.common.SharePreferenceContants;
 import com.liuzhao.onroad.entity.UserInfo;
 import com.liuzhao.onroad.net.Apn;
 import com.liuzhao.onroad.util.SharePreferenceUtil;
+import com.liuzhao.onroad.view.ToastMgr;
 
 import org.xutils.x;
 
@@ -23,16 +25,22 @@ public class RoadApp extends Application implements SharePreferenceContants {
     @Override
     public void onCreate() {
         super.onCreate();
+        mApp = this;
         x.Ext.init(this);
-        x.Ext.setDebug(true); // 是否输出debug日志
+        x.Ext.setDebug(CommonConstants.DEBUG); // 是否输出debug日志
         Apn.init();
+        getBuilder().init(mApp);
     }
 
     public RoadApp() {
         /* 当前应用对像初始化 */
         mApp = this;
     }
+    // 通用提示toast
+    public ToastMgr getBuilder() {
+        return ToastMgr.builder;
 
+    }
     /**
      * 保存用户信息
      *

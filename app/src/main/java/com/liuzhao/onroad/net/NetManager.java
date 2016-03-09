@@ -34,7 +34,7 @@ public enum NetManager {
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             if (entry.getKey() != NetConstants.METHOD) {
-                params.addBodyParameter(entry.getKey(), entry.getValue());
+                params.addQueryStringParameter(entry.getKey(), entry.getValue());
             }
         }
     }
@@ -46,9 +46,7 @@ public enum NetManager {
         RequestParams params = new RequestParams(NetConstants.HOST_URL_JUHE + method);
         buildParams(params, map);
         params.setMethod(HttpMethod.GET);
-        LogUtil.d("接口URL：" + NetConstants.HOST_URL_JUHE + params.toString());
-
-//      params.setSslSocketFactory(); // 设置ssl
+        LogUtil.d("接口" + NetConstants.HOST_URL_JUHE + params.toString());
         x.http().get(params, netCommonCallback);
     }
 

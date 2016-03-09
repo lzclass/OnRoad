@@ -36,17 +36,17 @@ public class NetCommonCallback<T> implements Callback.CommonCallback<String> {
 
     @Override
     public void onError(Throwable throwable, boolean isOnCallback) {
-        LogUtil.d(throwable.getMessage());
+        LogUtil.d("接口返回"+throwable.getMessage());
     }
 
     @Override
     public void onCancelled(CancelledException e) {
-        LogUtil.e("onCancelled" + e.getMessage());
+        LogUtil.e("接口返回onCancelled" + e.getMessage());
     }
 
     @Override
     public void onFinished() {
-
+        LogUtil.d("接口返回onFinished");
     }
 
 }
