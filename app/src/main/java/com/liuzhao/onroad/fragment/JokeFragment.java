@@ -44,8 +44,9 @@ public class JokeFragment extends BaseFragment {
     }
 
     private void initView() {
-        lv_joke.setPullRefreshEnable(false);
+        lv_joke.setPullRefreshEnable(true);
         lv_joke.setPullLoadEnable(true);
+
 
         // 设置下拉圆圈上的颜色
         mSwipeLayout.setColorSchemeResources(R.color.holo_blue_bright,
@@ -99,13 +100,6 @@ public class JokeFragment extends BaseFragment {
                     return;
                 }
                 list = t.getResult().getData();
-//                for (int i = 0; i < 10; i++) {
-//                    JokeBean bean = new JokeBean();
-//                    bean.setContent("我女朋友气跑了＂\r\n＂怎么回事？严重吗？你怎么着她了？＂\r\n＂不严重，我只是很久没用了");
-//                    bean.setHashId("03a6095c18e1d6fe7e2c19b2a20d03d1");
-//                    bean.setUnixtime("1418814837");
-//                    bean.setUpdatetime("2014-12-17 19:13:57");
-//                }
                 jokeListAdapter.update(list);
                 mSwipeLayout.setRefreshing(false);
 
