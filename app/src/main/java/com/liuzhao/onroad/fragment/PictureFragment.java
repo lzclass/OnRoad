@@ -1,12 +1,13 @@
 package com.liuzhao.onroad.fragment;
 
+
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.BaseActivity;
-import com.liuzhao.onroad.adapter.JokeListAdapter;
+import com.liuzhao.onroad.adapter.PictureAdapter;
 import com.liuzhao.onroad.common.CommonConstants;
 import com.liuzhao.onroad.entity.JokeBean;
 import com.liuzhao.onroad.entity.JokeListResult;
@@ -24,22 +25,24 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by liuzhao on 2016/3/1.
+ * @athor lz
+ * @dateTime 2016/3/11 15:26
+ * @deprecated 图
  */
-@ContentView(R.layout.fragment_joke)
-public class JokeFragment extends BaseFragment {
+@ContentView(R.layout.fragment_picture)
+public class PictureFragment extends BaseFragment {
     @ViewInject(R.id.swipe_container)
     private SwipeRefreshLayout mSwipeLayout;
     @ViewInject(R.id.lv_joke)
     private XListView lv_joke;
-    private JokeListAdapter jokeListAdapter;
+    private PictureAdapter adapter;
     private List<JokeBean> list;
     private int page = 1;
     private int pageSize = 10;
     private String time;
 
-    public static final JokeFragment newInstance() {
-        JokeFragment fragment = new JokeFragment();
+    public static final PictureFragment newInstance() {
+        PictureFragment fragment = new PictureFragment();
         return fragment;
     }
 
@@ -70,8 +73,8 @@ public class JokeFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
-        jokeListAdapter = new JokeListAdapter(getActivity(), list);
-        lv_joke.setAdapter(jokeListAdapter);
+        adapter = new PictureAdapter(getActivity(), list);
+        lv_joke.setAdapter(adapter);
         getData();
     }
 
@@ -85,7 +88,7 @@ public class JokeFragment extends BaseFragment {
     private void getData() {
         time = System.currentTimeMillis() + "";
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put(NetConstants.METHOD, NetConstants.JOKE_CONTENT);
+        map.put(NetConstants.METHOD, NetConstants.JOKE_IMG);
         map.put("sort", "desc");
         map.put("page", page + "");
         map.put("pagesize", pageSize + "");
@@ -100,7 +103,7 @@ public class JokeFragment extends BaseFragment {
                     return;
                 }
                 list = t.getResult().getData();
-                jokeListAdapter.update(list);
+                adapter.update(list);
                 mSwipeLayout.setRefreshing(false);
 
             }

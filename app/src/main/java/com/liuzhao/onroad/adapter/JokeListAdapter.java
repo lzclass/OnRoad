@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.entity.JokeBean;
+import com.liuzhao.onroad.util.Utils;
 
 import java.util.List;
 
@@ -18,14 +19,20 @@ public class JokeListAdapter extends BaseListAdapter<JokeBean> {
     }
 
     @Override
-    protected View getItemView(View convertView, int position) {
+    protected View getItemView(View convertView, final int position) {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.adapter_joke_list, null);
         }
         TextView tv_content = ViewHolder.get(convertView, R.id.tv_content);
         TextView tv_datetime = ViewHolder.get(convertView, R.id.tv_datetime);
+        TextView tv_share = ViewHolder.get(convertView, R.id.tv_share);
         tv_content.setText(mValues.get(position).getContent());
-        tv_datetime.setText(mValues.get(position).getUpdatetime());
+        tv_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.shareText(mValues.get(position).getContent(), mContext);
+            }
+        });
         return convertView;
     }
 }

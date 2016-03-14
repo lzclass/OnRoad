@@ -3,12 +3,12 @@ package com.liuzhao.onroad.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.fragment.HomePageFragment;
 import com.liuzhao.onroad.fragment.JokeFragment;
 import com.liuzhao.onroad.fragment.NavigationDrawerFragment;
+import com.liuzhao.onroad.fragment.PictureFragment;
 import com.liuzhao.onroad.fragment.StoryFragment;
 
 public class MainActivity extends BaseActivity
@@ -51,6 +51,12 @@ public class MainActivity extends BaseActivity
                         .replace(R.id.container, StoryFragment.newInstance())
                         .commit();
                 break;
+            case 3:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PictureFragment.newInstance())
+                        .commit();
+                break;
+
         }
 
     }
@@ -66,15 +72,18 @@ public class MainActivity extends BaseActivity
             case 2:
                 mTitle = getString(R.string.title_section2);
                 break;
+            case 3:
+                mTitle = getString(R.string.title_section3);
+                break;
         }
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
+//    public void restoreActionBar() {
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+//        actionBar.setDisplayShowTitleEnabled(true);
+//        actionBar.setTitle(mTitle);
+//    }
 
 
 }

@@ -82,6 +82,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.home_page),
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
+                        getString(R.string.title_section3),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -149,11 +150,11 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-/**
- * @athor lz
- * @dateTime 2016/3/7 14:34
- * @deprecated
- */
+    /**
+     * @athor lz
+     * @dateTime 2016/3/7 14:34
+     * @deprecated
+     */
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {

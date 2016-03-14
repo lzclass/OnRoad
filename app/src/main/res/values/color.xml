@@ -46,4 +46,6 @@
     <color name="clouds">#ecf0f1</color>
     <color name="midnight_blue">#141d26</color>
     <color name="seventy_transparent">#4c000000</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
 </resources>

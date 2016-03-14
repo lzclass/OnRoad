@@ -12,6 +12,10 @@ public class NetConstants {
 
     /*登录*/
     public static final String LOGIN = "login";
+    /*图*/
+    public static final String HOME_PAGE = "/homepage";
     /*笑话*/
-    public static final String JOKE = "/joke/content/list.from";
+    public static final String JOKE_CONTENT = "/joke/content/list.from";
+    /*图*/
+    public static final String JOKE_IMG = "/joke/img/list.from";
 }
