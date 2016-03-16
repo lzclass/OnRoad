@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.liuzhao.onroad.R;
-import com.liuzhao.onroad.adapter.StoryListAdapter;
 import com.liuzhao.onroad.entity.Article;
 import com.liuzhao.onroad.view.RecyclerViewHeader;
 
@@ -28,6 +27,7 @@ public class StoryFragment extends BaseFragment {
     private RecyclerViewHeader mRecyclerHeader;
     @ViewInject(R.id.recycler)
     private RecyclerView mRecycler;
+    private RvAdapter rvAdapter;
 
 
     public static final StoryFragment newInstance() {
@@ -55,8 +55,13 @@ public class StoryFragment extends BaseFragment {
     private void initView() {
 
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecycler.setAdapter(new StoryListAdapter(getActivity(), 10));
+//        mRecycler.setAdapter(new StoryListAdapter(getActivity(), 10));
 
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < 10; i++) {
+            list.add("num" + i);
+        }
+        rvAdapter = new RvAdapter(getActivity(), list);
         mRecyclerHeader.attachTo(mRecycler, true);
     }
 }
