@@ -1,8 +1,9 @@
 package com.liuzhao.onroad.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.liuzhao.onroad.R;
@@ -53,15 +54,22 @@ public class StoryFragment extends BaseFragment {
     }
 
     private void initView() {
-
-        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        mRecycler.setAdapter(new StoryListAdapter(getActivity(), 10));
+        // 创建一个线性布局管理器
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        // 创建矩形布局管理器
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL);
+        // 设置布局管理器
+        mRecycler.setLayoutManager(layoutManager);
 
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < 10; i++) {
             list.add("num" + i);
         }
         rvAdapter = new RvAdapter(getActivity(), list);
+        mRecycler.setAdapter(rvAdapter);
         mRecyclerHeader.attachTo(mRecycler, true);
+        // 设置item动画
+        mRecycler.setItemAnimator(new DefaultItemAnimator());
     }
 }
