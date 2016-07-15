@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
-import com.liuzhao.onroad.activity.MainActivity;
 import com.liuzhao.onroad.activity.WeiXinDetailActivity;
 import com.liuzhao.onroad.adapter.WeiXinSelectionAdapter;
 import com.liuzhao.onroad.common.IntentConstants;
@@ -66,9 +65,9 @@ public class WeiXinSelectionFragment extends BaseFragment {
         xlv_content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),WeiXinDetailActivity.class);
+                Intent intent = new Intent(getActivity(), WeiXinDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString(IntentConstants.URL,list.get(position).getUrl());
+                bundle.putString(IntentConstants.URL, list.get(position).getUrl());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -83,7 +82,7 @@ public class WeiXinSelectionFragment extends BaseFragment {
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+//        ((MainActivity) activity).onSectionAttached(
+//                getArguments().getInt(ARG_SECTION_NUMBER));
     }
 }

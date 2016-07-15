@@ -22,7 +22,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,17 +33,12 @@
         <activity android:name=".activity.WeiXinDetailActivity" />
         <activity
             android:name=".activity.MainSplashActivity"
-            android:label="@string/title_activity_main_splash"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_main_splash">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login" />
     </application>
 
 </manifest>
