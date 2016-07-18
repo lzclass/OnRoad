@@ -16,10 +16,13 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @Event(value = R.id.btn_login, type = View.OnClickListener.class)
+    @Event(value = R.id.iv_qq, type = View.OnClickListener.class)
     private void onButtonClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_login:
+            case R.id.iv_qq:
+
+                break;
+            case R.id.iv_weixin:
 
                 break;
         }
