@@ -39,6 +39,14 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="4eaee02c527015373b000003"></meta-data>
     </application>
 
 </manifest>
