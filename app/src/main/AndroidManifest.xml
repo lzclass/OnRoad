@@ -43,10 +43,17 @@
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
             android:theme="@style/Theme.UMDefault" />
-
+        <!-- 设置友盟appid-->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="4eaee02c527015373b000003"></meta-data>
+            android:value="55ed9e8167e58e6235001b86"></meta-data>
+        <!--微信平台 -->
+        <activity
+            android:name="com.liuzhao.onroad.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

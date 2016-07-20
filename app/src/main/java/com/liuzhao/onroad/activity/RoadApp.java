@@ -8,6 +8,7 @@ import com.liuzhao.onroad.entity.UserInfo;
 import com.liuzhao.onroad.net.Apn;
 import com.liuzhao.onroad.util.SharePreferenceUtil;
 import com.liuzhao.onroad.view.ToastMgr;
+import com.umeng.socialize.PlatformConfig;
 
 import org.xutils.x;
 
@@ -30,17 +31,23 @@ public class RoadApp extends Application implements SharePreferenceContants {
         x.Ext.setDebug(CommonConstants.DEBUG); // 是否输出debug日志
         Apn.init();
         getBuilder().init(mApp);
+        //微信 appid appsecret
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        // QQ和Qzone appid appkey
+        PlatformConfig.setAlipay("2015111700822536");
     }
 
     public RoadApp() {
         /* 当前应用对像初始化 */
         mApp = this;
     }
+
     // 通用提示toast
     public ToastMgr getBuilder() {
         return ToastMgr.builder;
 
     }
+
     /**
      * 保存用户信息
      *
