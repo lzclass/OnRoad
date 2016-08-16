@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity {
         mShareAPI.doOauthVerify(this, platform, umAuthListener);
     }
 
-    @Event(value = {R.id.iv_qq, R.id.iv_weixin}, type = View.OnClickListener.class)
+    @Event(type = View.OnClickListener.class,value = {R.id.iv_qq, R.id.iv_weixin} )
     private void onButtonClick(View v) {
         switch (v.getId()) {
             case R.id.iv_qq:
