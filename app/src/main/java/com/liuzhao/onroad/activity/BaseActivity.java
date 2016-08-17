@@ -3,6 +3,8 @@ package com.liuzhao.onroad.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.liuzhao.onroad.BuildConfig;
+
 import org.xutils.x;
 
 
@@ -17,6 +19,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         x.view().inject(this);
+        x.Ext.init(mApp);
+        x.Ext.setDebug(BuildConfig.DEBUG); // 是否输出debug日志, 开启debug会影响性能.
         mApp = RoadApp.getSelf();
     }
 

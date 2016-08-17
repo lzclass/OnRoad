@@ -18,7 +18,6 @@ import java.util.List;
 
 /**
  * @author liuzhao
- * @description
  * @date 2015-12-8下午3:37:46
  */
 @ContentView(R.layout.fragment_story)
@@ -31,7 +30,7 @@ public class StoryFragment extends BaseFragment {
     private RvAdapter rvAdapter;
 
 
-    public static final StoryFragment newInstance() {
+    public static final StoryFragment getInstance() {
         StoryFragment fragment = new StoryFragment();
         return fragment;
     }

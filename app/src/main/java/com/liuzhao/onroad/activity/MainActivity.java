@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -16,32 +15,37 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.fragment.HomePageFragment;
+import com.liuzhao.onroad.fragment.JokeFragment;
+import com.liuzhao.onroad.fragment.PictureInfoFragment;
+import com.liuzhao.onroad.util.Utils;
 
 import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
-
 @ContentView(value = R.layout.activity_main)
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    @ViewInject(value = R.id.iv_headImage)
+        implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
+    private View nav_header_main;
     private ImageView iv_headImage;
-    @ViewInject(value = R.id.tv_username)
     private TextView tv_username;
     @ViewInject(value = R.id.nav_view)
     private NavigationView nav_view;
+    private LinearLayout ll_head;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ll_head= (LinearLayout) nav_view.getHeaderView(0).findViewById(R.id.ll_head);
+        iv_headImage= (ImageView)nav_view.getHeaderView(0).findViewById(R.id.iv_headImage);
+        tv_username= (TextView) nav_view.getHeaderView(0).findViewById(R.id.tv_username);
+        ll_head.setOnClickListener(this);
+        nav_view.setNavigationItemSelectedListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,27 +60,15 @@ public class MainActivity extends BaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-//        NavigationView nav_view = (NavigationView) findViewById(R.id.nav_view);
-        nav_view.setNavigationItemSelectedListener(this);
-        initFragment();
+        tv_username.setText("静默山水间");
     }
 
-    private void initFragment() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment fragment = HomePageFragment.newInstance();
-        fragmentTransaction.add(R.id.fra_layout, fragment);
-        fragmentTransaction.commit();
-    }
-
-    @Event(type = View.OnClickListener.class, value = R.id.iv_headImage)
-    private void onClick(View v) {
+    public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_headImage:
-                Toast.makeText(this, "你好我是Xutils的IOC功能", Toast.LENGTH_SHORT).show();
+            case R.id.ll_head:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 break;
+
         }
     }
 
@@ -99,96 +91,47 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (item.getItemId()) {
             case R.id.nav_home:
-
+                fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
                 break;
             case R.id.nav_text:
-
+                fragmentTransaction.replace(R.id.fra_layout, JokeFragment.getInstance()).commit();
                 break;
             case R.id.nav_picture:
-
+                fragmentTransaction.replace(R.id.fra_layout, PictureInfoFragment.getInstance()).commit();
                 break;
             case R.id.nav_audio:
-
+                fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
                 break;
             case R.id.nav_video:
-
+                fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
                 break;
             case R.id.nav_send:
-
+                Utils.showMyToast("跳转到反馈页");
                 break;
             case R.id.nav_share:
-
+                Utils.showMyToast("跳转到分享页面");
                 break;
 
         }
+//        item.setChecked(true);
         //关闭左边菜单
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//
-//    @Override
-//    public void onNavigationDrawerItemSelected(int position) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        switch (position) {
-//            case 0:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, HomePageFragment.newInstance())
-//                        .commit();
-//                break;
-//            case 1:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, JokeFragment.newInstance())
-//                        .commit();
-//                break;
-//            case 2:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, StoryFragment.newInstance())
-//                        .commit();
-//                break;
-//            case 3:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, PictureFragment.newInstance())
-//                        .commit();
-//                break;
-//
-//        }
-//
-//    }
-//
-//    public void onSectionAttached(int number) {
-//        switch (number) {
-//            case 0:
-//                mTitle = getString(R.string.home_page);
-//                break;
-//            case 1:
-//                mTitle = getString(R.string.title_section1);
-//                break;
-//            case 2:
-//                mTitle = getString(R.string.title_section2);
-//                break;
-//            case 3:
-//                mTitle = getString(R.string.title_section3);
-//                break;
-//        }
-//    }
 
 //    public void restoreActionBar() {
 //        ActionBar actionBar = getSupportActionBar();

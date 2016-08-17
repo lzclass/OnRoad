@@ -27,10 +27,9 @@ import java.util.List;
 /**
  * @athor lz
  * @dateTime 2016/3/11 15:26
- * @deprecated 图
  */
 @ContentView(R.layout.fragment_picture)
-public class PictureFragment extends BaseFragment {
+public class PictureInfoFragment extends BaseFragment {
     @ViewInject(R.id.swipe_container)
     private SwipeRefreshLayout mSwipeLayout;
     @ViewInject(R.id.lv_joke)
@@ -41,8 +40,8 @@ public class PictureFragment extends BaseFragment {
     private int pageSize = 10;
     private String time;
 
-    public static final PictureFragment newInstance() {
-        PictureFragment fragment = new PictureFragment();
+    public static PictureInfoFragment getInstance() {
+        PictureInfoFragment fragment = new PictureInfoFragment();
         return fragment;
     }
 
@@ -111,14 +110,14 @@ public class PictureFragment extends BaseFragment {
             @Override
             public void onError(Throwable throwable, boolean isOnCallback) {
                 super.onError(throwable, isOnCallback);
-                Utils.showToast("onError");
+                Utils.showMyToast("onError");
                 mSwipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onCancelled(CancelledException e) {
                 super.onCancelled(e);
-                Utils.showToast("onCancelled");
+                Utils.showMyToast("onCancelled");
                 mSwipeLayout.setRefreshing(false);
             }
 

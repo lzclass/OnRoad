@@ -17,11 +17,10 @@ import java.util.ArrayList;
 
 public class Utils {
     /**
-     * @athor lz
+     * @athor lz 显示toast
      * @dateTime 2016/3/10 9:21
-     * @deprecated 显示toast
      */
-    public static void showToast(String content) {
+    public static void showMyToast(String content) {
         if (!StringUtils.isNullOrEmpty(content)) {
             if (RoadApp.getSelf().getBuilder() != null) {
                 RoadApp.getSelf().getBuilder().display(content, Toast.LENGTH_SHORT);
@@ -30,9 +29,8 @@ public class Utils {
     }
 
     /**
-     * @athor lz
+     * @athor lz 判断网络是否可用
      * @dateTime 2016/3/10 9:21
-     * @deprecated 判断网络是否可用
      */
     public static boolean isNetworkAvailable(Context context) {
         // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）

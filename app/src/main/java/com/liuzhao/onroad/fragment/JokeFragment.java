@@ -38,7 +38,7 @@ public class JokeFragment extends BaseFragment {
     private int pageSize = 10;
     private String time;
 
-    public static final JokeFragment newInstance() {
+    public static final JokeFragment getInstance() {
         JokeFragment fragment = new JokeFragment();
         return fragment;
     }
@@ -108,14 +108,14 @@ public class JokeFragment extends BaseFragment {
             @Override
             public void onError(Throwable throwable, boolean isOnCallback) {
                 super.onError(throwable, isOnCallback);
-                Utils.showToast("onError");
+                Utils.showMyToast("onError");
                 mSwipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onCancelled(CancelledException e) {
                 super.onCancelled(e);
-                Utils.showToast("onCancelled");
+                Utils.showMyToast("onCancelled");
                 mSwipeLayout.setRefreshing(false);
             }
 

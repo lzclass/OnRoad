@@ -45,7 +45,7 @@ public class HomePageFragment extends BaseFragment {
     }
 
 
-    public static HomePageFragment newInstance() {
+    public static HomePageFragment getInstance() {
         HomePageFragment fragment = new HomePageFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);

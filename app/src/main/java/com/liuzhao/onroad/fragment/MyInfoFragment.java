@@ -16,7 +16,7 @@ public class MyInfoFragment extends BaseFragment {
 
     private RecyclerView rv_menu;
 
-    public static final MyInfoFragment newInstance() {
+    public static final MyInfoFragment getInstance() {
         MyInfoFragment fragment = new MyInfoFragment();
         return fragment;
     }
