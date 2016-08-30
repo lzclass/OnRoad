@@ -1,26 +1,21 @@
 package com.liuzhao.onroad.fragment;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.liuzhao.onroad.R;
-import com.liuzhao.onroad.activity.BaseActivity;
-import com.liuzhao.onroad.adapter.JokeListAdapter;
-import com.liuzhao.onroad.common.CommonConstants;
-import com.liuzhao.onroad.entity.JokeBean;
-import com.liuzhao.onroad.entity.JokeListResult;
-import com.liuzhao.onroad.net.NetCommonCallback;
-import com.liuzhao.onroad.net.NetConstants;
-import com.liuzhao.onroad.net.NetManager;
-import com.liuzhao.onroad.util.JsonUtils;
-import com.liuzhao.onroad.util.Utils;
-import com.liuzhao.onroad.view.listview.XListView;
+import com.liuzhao.onroad.adapter.JokeViewPagerAdapter;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,104 +23,59 @@ import java.util.List;
  */
 @ContentView(R.layout.fragment_joke)
 public class JokeFragment extends BaseFragment {
-    @ViewInject(R.id.swipe_container)
-    private SwipeRefreshLayout mSwipeLayout;
-    @ViewInject(R.id.lv_joke)
-    private XListView lv_joke;
-    private JokeListAdapter jokeListAdapter;
-    private List<JokeBean> list;
-    private int page = 1;
-    private int pageSize = 10;
-    private String time;
+    @ViewInject(R.id.vp_joke)
+    private ViewPager vp_joke;
+    @ViewInject(R.id.tabs_joke)
+    private TabLayout tabs_joke;
+    private LayoutInflater mInflater;
+    private String[] mTitleList = {"文字","图片"};//页卡标题集合
+    private List<Fragment> fragments = new ArrayList<>();//页卡视图集合
 
     public static final JokeFragment getInstance() {
         JokeFragment fragment = new JokeFragment();
         return fragment;
     }
 
-    private void initView() {
-        lv_joke.setPullRefreshEnable(true);
-        lv_joke.setPullLoadEnable(true);
-
-
-        // 设置下拉圆圈上的颜色
-        mSwipeLayout.setColorSchemeResources(R.color.holo_blue_bright,
-                R.color.holo_green_light, R.color.holo_orange_light,
-                R.color.holo_red_light);
-        mSwipeLayout.setDistanceToTriggerSync(400);// 设置手指在屏幕下拉多少距离会触发下拉刷新
-        mSwipeLayout.setProgressBackgroundColorSchemeResource(whiteColor);// 设定下拉圆圈的背景
-        mSwipeLayout.setSize(SwipeRefreshLayout.DEFAULT); // 设置圆圈的大小
-
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-
-            @Override
-            public void onRefresh() {
-                page = 1;
-                getData();
-            }
-        });
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView();
-        jokeListAdapter = new JokeListAdapter(getActivity(), list);
-        lv_joke.setAdapter(jokeListAdapter);
-        getData();
-    }
+        FragmentManager fragmentManager = getFragmentManager();
+        mInflater = LayoutInflater.from(mContext);
 
-    //    请求参数说明：
-//    名称 	类型 	必填 	说明
-//    sort 	string 	是 	类型，desc:指定时间之前发布的，asc:指定时间之后发布的
-//    page 	int 	否 	当前页数,默认1
-//    pagesize 	int 	否 	每次返回条数,默认1,最大20
-//    time 	string 	是 	时间戳（10位），如：1418816972
-//    key 	string 	是 	您申请的key
-    private void getData() {
-        time = System.currentTimeMillis() + "";
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put(NetConstants.METHOD, NetConstants.JOKE_CONTENT);
-        map.put("sort", "desc");
-        map.put("page", page + "");
-        map.put("pagesize", pageSize + "");
-        map.put("time", time.substring(0, 10));
-        map.put("key", CommonConstants.JUHE_JOKE_KEY);
-        NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(JokeListResult.class, (BaseActivity) getActivity()) {
+        tabs_joke.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+
+        fragments.add(JokeTextFragment.getInstance());
+        fragments.add(JokeImageFragment.getInstance());
+
+        JokeViewPagerAdapter mAdapter = new JokeViewPagerAdapter(fragmentManager,fragments,mTitleList);
+        vp_joke.setAdapter(mAdapter);//给ViewPager设置适配器
+
+        tabs_joke.setupWithViewPager(vp_joke);//将TabLayout和ViewPager关联起来。
+        tabs_joke.setTabsFromPagerAdapter(mAdapter);//给Tabs设置适配器
+        vp_joke.setCurrentItem(0);
+
+
+        vp_joke.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onSuccess(String result) {
-                super.onSuccess(result);
-                JokeListResult t = JsonUtils.parseJson(result, JokeListResult.class);
-                if (t.getResult().getData() == null || t.getResult().getData().size() == 0) {
-                    return;
-                }
-                list = t.getResult().getData();
-                jokeListAdapter.update(list);
-                mSwipeLayout.setRefreshing(false);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onError(Throwable throwable, boolean isOnCallback) {
-                super.onError(throwable, isOnCallback);
-                Utils.showMyToast("onError");
-                mSwipeLayout.setRefreshing(false);
+            public void onPageSelected(int position) {
+                vp_joke.setCurrentItem(position);
             }
 
             @Override
-            public void onCancelled(CancelledException e) {
-                super.onCancelled(e);
-                Utils.showMyToast("onCancelled");
-                mSwipeLayout.setRefreshing(false);
-            }
+            public void onPageScrollStateChanged(int state) {
 
-            @Override
-            public void onFinished() {
-                super.onFinished();
-                mSwipeLayout.setRefreshing(false);
             }
         });
-
-
     }
+
 }
