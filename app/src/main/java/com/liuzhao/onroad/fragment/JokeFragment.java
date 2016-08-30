@@ -29,7 +29,6 @@ public class JokeFragment extends BaseFragment {
     private TabLayout tabs_joke;
     private LayoutInflater mInflater;
     private String[] mTitleList = {"文字","图片"};//页卡标题集合
-    private List<Fragment> fragments = new ArrayList<>();//页卡视图集合
 
     public static final JokeFragment getInstance() {
         JokeFragment fragment = new JokeFragment();
@@ -48,7 +47,7 @@ public class JokeFragment extends BaseFragment {
         mInflater = LayoutInflater.from(mContext);
 
         tabs_joke.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
-
+        List<Fragment> fragments = new ArrayList<>();
         fragments.add(JokeTextFragment.getInstance());
         fragments.add(JokeImageFragment.getInstance());
 
