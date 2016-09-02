@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.BaseActivity;
@@ -39,6 +40,10 @@ public class JokeTextFragment extends BaseFragment {
     private int pageSize = 10;
     private String time;
     private ViewPager vp_joke;
+    /*是否是初始化*/
+    private boolean isInit = false;
+    @ViewInject(R.id.ll_no_data)
+    private LinearLayout ll_no_data;
 
     public static final JokeFragment getInstance() {
         JokeFragment fragment = new JokeFragment();
@@ -46,9 +51,9 @@ public class JokeTextFragment extends BaseFragment {
     }
 
     private void initView() {
+        lv_joke.setEmptyView(ll_no_data);
         lv_joke.setPullRefreshEnable(true);
         lv_joke.setPullLoadEnable(true);
-
 
         // 设置下拉圆圈上的颜色
         mSwipeLayout.setColorSchemeResources(R.color.holo_blue_bright,
@@ -67,15 +72,28 @@ public class JokeTextFragment extends BaseFragment {
                 getData();
             }
         });
+        jokeListAdapter = new JokeListAdapter(getActivity(), list);
+        lv_joke.setAdapter(jokeListAdapter);
+        getData();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
-        jokeListAdapter = new JokeListAdapter(getActivity(), list);
-        lv_joke.setAdapter(jokeListAdapter);
-        getData();
+
+    }
+
+    //实现了懒加载+数据缓存的效果
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isInit)//isInit  默认是false 没有初始化控件过，不然会空指针
+        {
+            initView();
+        } else {
+            isInit = true;//不可见，设置为false 第二次可见的时候不执行加载数据的方法
+        }
     }
 
     //    请求参数说明：

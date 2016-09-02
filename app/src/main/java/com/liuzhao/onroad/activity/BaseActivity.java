@@ -24,4 +24,7 @@ public class BaseActivity extends AppCompatActivity {
         mApp = RoadApp.getSelf();
     }
 
+    private void initHeader(){
+
+    }
 }

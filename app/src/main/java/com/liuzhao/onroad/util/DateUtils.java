@@ -252,6 +252,17 @@ public class DateUtils {
         String date = sdf.format(time * 1000);
         return date;
     }
+    /**
+     * 得到日期 yyyyMMdd
+     *
+     * @param dateTime
+     * @return
+     */
+    public static String formatDate(String dateTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String date = sdf.format(dateTime);
+        return date;
+    }
 
     /**
      * 得到时间 HH:mm:ss

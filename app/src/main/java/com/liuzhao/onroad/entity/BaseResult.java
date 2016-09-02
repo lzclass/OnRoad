@@ -10,22 +10,23 @@ import java.io.Serializable;
 public class BaseResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public String error_code;
-    public String reason;
+    /*0失败1成功2参数错误: 一般是缺少或参数值不符合要求3帐号已存在4验证码错误500服务器错误404接口不存在422token无效*/
+    public String code;
+    public String message;
 
-    public String getReason() {
-        return reason;
+    public String getCode() {
+        return code;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getError_code() {
-        return error_code;
+    public String getMessage() {
+        return message;
     }
 
-    public void setError_code(String error_code) {
-        this.error_code = error_code;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

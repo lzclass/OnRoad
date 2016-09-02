@@ -9,11 +9,12 @@ import android.widget.TextView;
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.activity.BaseActivity;
 import com.liuzhao.onroad.activity.RoadApp;
-import com.liuzhao.onroad.entity.HomePageData;
-import com.liuzhao.onroad.entity.HomePageResult;
+import com.liuzhao.onroad.entity.DayWordData;
+import com.liuzhao.onroad.entity.DayWordResult;
 import com.liuzhao.onroad.net.NetCommonCallback;
 import com.liuzhao.onroad.net.NetConstants;
 import com.liuzhao.onroad.net.NetManager;
+import com.liuzhao.onroad.util.DateUtils;
 import com.liuzhao.onroad.util.JsonUtils;
 
 import org.xutils.common.Callback;
@@ -56,18 +57,10 @@ public class HomePageFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initDate();
-
+        getData();
     }
 
-    private void initDate() {
-        HomePageData data = new HomePageData();
-        data.setContent("表，属于时间；钟，属于岁月。是的，它们的区别就是这样，就像一个明喻一个暗喻一样,就像一个散文一个诗一样");
-        data.setImgAuthor("行尽天涯");
-        data.setDate("02 Feb.2016 Tue");
-        data.setTxtAuthor("from 《钟表》");
-        data.setImgNo("SIMPLE.20160309");
-        data.setImgUrl("http://d.hiphotos.baidu.com/lvpics/w=1000/sign=81bf893e12dfa9ecfd2e521752e0f603/242dd42a2834349b705785a7caea15ce36d3bebb.jpg");
+    private void initDate(DayWordData data) {
         ImageOptions imageOptions = new ImageOptions.Builder()
                 // 加载中或错误图片的ScaleType
                 //.setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
@@ -76,14 +69,14 @@ public class HomePageFragment extends BaseFragment {
                 .setIgnoreGif(false)
                 .setImageScaleType(ImageView.ScaleType.MATRIX)
                 .build();
-        tv_pic_no.setText(data.getImgNo());
-        tv_pic_author.setText(data.getImgAuthor());
+        tv_pic_no.setText("DALIY_"+DateUtils.formatDate(data.getDateTime()));
+        tv_pic_author.setText(data.getAuthor());
         tv_home_content.setText(data.getContent());
-        tv_home_author.setText(data.getTxtAuthor());
-        tv_date.setText(data.getDate());
+        tv_home_author.setText(data.getAuthor());
+        tv_date.setText(DateUtils.formatDate(data.getDateTime()));
 
         x.Ext.init(RoadApp.getSelf());
-        x.image().bind(iv_home_content, data.getImgUrl(), new Callback.CommonCallback<Drawable>() {
+        x.image().bind(iv_home_content, data.getImageUrl(), new Callback.CommonCallback<Drawable>() {
             @Override
             public void onSuccess(Drawable drawable) {
                 iv_home_content.setImageDrawable(drawable);
@@ -109,14 +102,13 @@ public class HomePageFragment extends BaseFragment {
     private void getData() {
 
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put(NetConstants.METHOD, NetConstants.HOME_PAGE);
-        map.put("date", date);
-        NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(HomePageResult.class, (BaseActivity) getActivity()) {
+        map.put(NetConstants.METHOD, NetConstants.DAY_WORD);
+        NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(DayWordResult.class, (BaseActivity) getActivity()) {
             @Override
             public void onSuccess(String result) {
                 super.onSuccess(result);
-                HomePageResult t = JsonUtils.parseJson(result, HomePageResult.class);
-
+                DayWordResult t = JsonUtils.parseJson(result, DayWordResult.class);
+                initDate(t.getDatum());
             }
 
             @Override

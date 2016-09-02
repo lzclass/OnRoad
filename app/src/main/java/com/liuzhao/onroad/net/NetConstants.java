@@ -12,8 +12,8 @@ public class NetConstants {
 
     /*登录*/
     public static final String LOGIN = "login";
-    /*图*/
-    public static final String HOME_PAGE = "/homepage";
+    /*每日一言*/
+    public static final String DAY_WORD = "/dayWord";
     /*笑话*/
     public static final String JOKE_CONTENT = "/joke/content/list.from";
     /*图*/
