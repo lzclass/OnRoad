@@ -39,7 +39,6 @@ public class MainActivity extends BaseActivity
     @ViewInject(value = R.id.nav_view)
     private NavigationView nav_view;
     private LinearLayout ll_head;
-    private Button btn_sign;
     private Toolbar toolbar;
 
     @Override
@@ -49,7 +48,8 @@ public class MainActivity extends BaseActivity
         initView();
 
     }
-    private void initToolBar(){
+
+    private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("首页");//setTitle方法要在setSupportActionBar(toolbar)之前调用
         setSupportActionBar(toolbar);
@@ -60,13 +60,12 @@ public class MainActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
     }
-    private void initView(){
+
+    private void initView() {
         ll_head = (LinearLayout) nav_view.getHeaderView(0).findViewById(R.id.ll_head);
         iv_headImage = (ImageView) nav_view.getHeaderView(0).findViewById(R.id.iv_headImage);
         tv_username = (TextView) nav_view.getHeaderView(0).findViewById(R.id.tv_username);
-        btn_sign = (Button) nav_view.getHeaderView(0).findViewById(R.id.btn_sign);
         ll_head.setOnClickListener(this);
-        btn_sign.setOnClickListener(this);
         nav_view.setNavigationItemSelectedListener(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +81,7 @@ public class MainActivity extends BaseActivity
                 // 加载中或错误图片的ScaleType
                 .setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
                 // 不设置则默认自动适应大小
-                .setSize(100, 100)
+                .setSize(150, 150)
                 .setIgnoreGif(false)
                 .setImageScaleType(ImageView.ScaleType.MATRIX)
                 .build();
@@ -91,13 +90,10 @@ public class MainActivity extends BaseActivity
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_head:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                break;
-            case R.id.btn_sign:
-                Utils.showMyToast("签到+1");
-                btn_sign.setText("已签到");
-                btn_sign.setEnabled(false);
+            case R.id.tv_username:
+                if (tv_username.getText().toString().equals("未登录")) {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
                 break;
         }
     }
@@ -137,13 +133,13 @@ public class MainActivity extends BaseActivity
             case R.id.nav_home:
                 fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
                 break;
-            case R.id.nav_fo:
+            case R.id.nav_text:
                 fragmentTransaction.replace(R.id.fra_layout, JokeFragment.getInstance()).commit();
                 break;
-            case R.id.nav_dao:
+            case R.id.nav_picture:
                 fragmentTransaction.replace(R.id.fra_layout, PictureInfoFragment.getInstance()).commit();
                 break;
-            case R.id.nav_ru:
+            case R.id.nav_audio:
                 fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
                 break;
             case R.id.nav_send:

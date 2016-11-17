@@ -42,8 +42,6 @@ public class JokeTextFragment extends BaseFragment {
     private ViewPager vp_joke;
     /*是否是初始化*/
     private boolean isInit = false;
-    @ViewInject(R.id.ll_no_data)
-    private LinearLayout ll_no_data;
 
     public static final JokeFragment getInstance() {
         JokeFragment fragment = new JokeFragment();
@@ -51,7 +49,6 @@ public class JokeTextFragment extends BaseFragment {
     }
 
     private void initView() {
-        lv_joke.setEmptyView(ll_no_data);
         lv_joke.setPullRefreshEnable(true);
         lv_joke.setPullLoadEnable(true);
 

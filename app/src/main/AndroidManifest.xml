@@ -33,11 +33,12 @@
         <activity android:name=".activity.WeiXinDetailActivity" />
         <activity
             android:name=".activity.MainSplashActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main_splash">
-
         </activity>
         <activity
             android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login" />
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
