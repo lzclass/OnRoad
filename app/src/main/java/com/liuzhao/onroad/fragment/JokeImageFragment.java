@@ -93,40 +93,6 @@ public class JokeImageFragment extends BaseFragment {
         map.put("page", page + "");
         map.put("pagesize", pageSize + "");
         map.put("key", CommonConstants.JUHE_JOKE_KEY);
-        NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(JokeListResult.class, (BaseActivity) getActivity()) {
-            @Override
-            public void onSuccess(String result) {
-                super.onSuccess(result);
-                JokeListResult t = JsonUtils.parseJson(result, JokeListResult.class);
-                if (t.getResult().getData() == null || t.getResult().getData().size() == 0) {
-                    return;
-                }
-                list = t.getResult().getData();
-                jokeListAdapter.update(list);
-                mSwipeLayout.setRefreshing(false);
-
-            }
-
-            @Override
-            public void onError(Throwable throwable, boolean isOnCallback) {
-                super.onError(throwable, isOnCallback);
-                Utils.showMyToast("onError");
-                mSwipeLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onCancelled(CancelledException e) {
-                super.onCancelled(e);
-                Utils.showMyToast("onCancelled");
-                mSwipeLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onFinished() {
-                super.onFinished();
-                mSwipeLayout.setRefreshing(false);
-            }
-        });
 
 
     }

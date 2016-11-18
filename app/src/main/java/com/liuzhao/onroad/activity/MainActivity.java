@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
@@ -38,7 +39,7 @@ public class MainActivity extends BaseActivity
     private TextView tv_username;
     @ViewInject(value = R.id.nav_view)
     private NavigationView nav_view;
-    private LinearLayout ll_head;
+    private RelativeLayout rl_head;
     private Toolbar toolbar;
 
     @Override
@@ -62,10 +63,10 @@ public class MainActivity extends BaseActivity
     }
 
     private void initView() {
-        ll_head = (LinearLayout) nav_view.getHeaderView(0).findViewById(R.id.ll_head);
+        rl_head = (RelativeLayout) nav_view.getHeaderView(0).findViewById(R.id.rl_head);
         iv_headImage = (ImageView) nav_view.getHeaderView(0).findViewById(R.id.iv_headImage);
         tv_username = (TextView) nav_view.getHeaderView(0).findViewById(R.id.tv_username);
-        ll_head.setOnClickListener(this);
+        rl_head.setOnClickListener(this);
         nav_view.setNavigationItemSelectedListener(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

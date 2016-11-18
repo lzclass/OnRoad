@@ -33,28 +33,30 @@
         <activity android:name=".activity.WeiXinDetailActivity" />
         <activity
             android:name=".activity.MainSplashActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_main_splash">
-        </activity>
+            android:label="@string/title_activity_main_splash"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
             android:theme="@style/Theme.UMDefault" />
-        <!-- 设置友盟appid-->
+        <!-- 设置友盟appid -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55ed9e8167e58e6235001b86"></meta-data>
-        <!--微信平台 -->
+            android:value="55ed9e8167e58e6235001b86" />
+        <!-- 微信平台 -->
         <activity
-            android:name="com.liuzhao.onroad.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

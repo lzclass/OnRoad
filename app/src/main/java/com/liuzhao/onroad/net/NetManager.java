@@ -24,11 +24,6 @@ public enum NetManager {
     }
 
     private static void buildParams(RequestParams params, HashMap<String, String> map) {
-        //如果是登录，增加头部参数
-//        if (map.get(NetConstants.MESSAGENAME).equals(NetConstants.LOGIN)) {
-//            Apn.addHeads(map);
-//        }
-
         Set<Map.Entry<String, String>> entrySet = map.entrySet();
         Iterator<Map.Entry<String, String>> iterator = entrySet.iterator();
         while (iterator.hasNext()) {
@@ -41,12 +36,12 @@ public enum NetManager {
 
 
     public <T> void doGetHttp(HashMap<String, String> map, NetCommonCallback netCommonCallback) {
-
+        if (map == null || map.size() < 1)
+            return;
         Object method = map.get(NetConstants.METHOD);
-        RequestParams params = new RequestParams(NetConstants.HOST_URL_JUHE + method);
+        RequestParams params = new RequestParams(NetConstants.HOST_URL_LOCAL + method);
         buildParams(params, map);
         params.setMethod(HttpMethod.GET);
-        LogUtil.d("接口" + NetConstants.HOST_URL_JUHE + params.toString());
         x.http().get(params, netCommonCallback);
     }
 

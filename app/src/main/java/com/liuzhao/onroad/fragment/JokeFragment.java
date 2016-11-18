@@ -42,7 +42,7 @@ public class JokeFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(JokeTextFragment.getInstance());
+        fragments.add(JokeImageFragment.getInstance());
         fragments.add(JokeImageFragment.getInstance());
 
         JokeViewPagerAdapter mAdapter = new JokeViewPagerAdapter(getFragmentManager(), fragments, mTitleList);

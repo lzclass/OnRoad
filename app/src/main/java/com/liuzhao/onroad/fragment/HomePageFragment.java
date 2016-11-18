@@ -11,6 +11,7 @@ import com.liuzhao.onroad.activity.BaseActivity;
 import com.liuzhao.onroad.activity.RoadApp;
 import com.liuzhao.onroad.entity.DayWordData;
 import com.liuzhao.onroad.entity.DayWordResult;
+import com.liuzhao.onroad.myinterface.NetResultCallBack;
 import com.liuzhao.onroad.net.NetCommonCallback;
 import com.liuzhao.onroad.net.NetConstants;
 import com.liuzhao.onroad.net.NetManager;
@@ -61,21 +62,12 @@ public class HomePageFragment extends BaseFragment {
     }
 
     private void initDate(DayWordData data) {
-        ImageOptions imageOptions = new ImageOptions.Builder()
-                // 加载中或错误图片的ScaleType
-                //.setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
-                // 默认自动适应大小
-                // .setSize(...)
-                .setIgnoreGif(false)
-                .setImageScaleType(ImageView.ScaleType.MATRIX)
-                .build();
-        tv_pic_no.setText("DALIY_"+DateUtils.formatDate(data.getDateTime()));
+//        tv_pic_no.setText("DALIY_" + DateUtils.formatDate(data.getDateTime()));
         tv_pic_author.setText(data.getAuthor());
         tv_home_content.setText(data.getContent());
         tv_home_author.setText(data.getAuthor());
-        tv_date.setText(DateUtils.formatDate(data.getDateTime()));
+        tv_date.setText(data.getDateTime());
 
-        x.Ext.init(RoadApp.getSelf());
         x.image().bind(iv_home_content, data.getImageUrl(), new Callback.CommonCallback<Drawable>() {
             @Override
             public void onSuccess(Drawable drawable) {
@@ -102,30 +94,18 @@ public class HomePageFragment extends BaseFragment {
     private void getData() {
 
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put(NetConstants.METHOD, NetConstants.DAY_WORD);
-        NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(DayWordResult.class, (BaseActivity) getActivity()) {
+        map.put(NetConstants.METHOD, NetConstants.GET_DAY_WORD);
+        NetManager.INSTANCE.doGetHttp(map, new NetCommonCallback(DayWordResult.class, mContext, new NetResultCallBack<DayWordResult>() {
             @Override
-            public void onSuccess(String result) {
-                super.onSuccess(result);
-                DayWordResult t = JsonUtils.parseJson(result, DayWordResult.class);
-                initDate(t.getDatum());
+            public void onSuccess(DayWordResult result) {
+                initDate(result.getDatum());
             }
 
             @Override
-            public void onError(Throwable throwable, boolean isOnCallback) {
-                super.onError(throwable, isOnCallback);
-            }
+            public void onError(int code, String msg) {
 
-            @Override
-            public void onCancelled(CancelledException e) {
-                super.onCancelled(e);
             }
-
-            @Override
-            public void onFinished() {
-                super.onFinished();
-            }
-        });
+        }));
 
 
     }

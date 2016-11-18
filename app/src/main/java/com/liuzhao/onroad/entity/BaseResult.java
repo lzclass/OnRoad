@@ -11,14 +11,14 @@ public class BaseResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /*0失败1成功2参数错误: 一般是缺少或参数值不符合要求3帐号已存在4验证码错误500服务器错误404接口不存在422token无效*/
-    public String code;
+    public int code;
     public String message;
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
