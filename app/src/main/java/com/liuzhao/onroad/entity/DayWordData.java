@@ -10,8 +10,17 @@ public class DayWordData implements Serializable {
     private String id;
     private String dateTime;
     private String content;
-    private String author;
+    private String textAuthor;
+    private String ImageAuthor;
     private String imageUrl;
+
+    public String getImageAuthor() {
+        return ImageAuthor;
+    }
+
+    public void setImageAuthor(String imageAuthor) {
+        ImageAuthor = imageAuthor;
+    }
 
     public String getId() {
         return id;
@@ -37,12 +46,12 @@ public class DayWordData implements Serializable {
         this.content = content;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getTextAuthor() {
+        return textAuthor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setTextAuthor(String textAuthor) {
+        this.textAuthor = textAuthor;
     }
 
     public String getImageUrl() {

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.liuzhao.onroad.R;
-import com.liuzhao.onroad.adapter.JokeViewPagerAdapter;
+import com.liuzhao.onroad.adapter.TopicViewPagerAdapter;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -19,17 +19,18 @@ import java.util.List;
 
 /**
  * Created by liuzhao on 2016/8/31.
+ * 话题
  */
-@ContentView(R.layout.fragment_joke)
-public class JokeFragment extends BaseFragment {
-    @ViewInject(R.id.vp_joke)
-    private ViewPager vp_joke;
-    @ViewInject(R.id.tabs_joke)
-    private TabLayout tabs_joke;
-    private String[] mTitleList = {"文字", "图片"};//页卡标题集合
+@ContentView(R.layout.fragment_topic)
+public class TopicFragment extends BaseFragment {
+    @ViewInject(R.id.vp_topic)
+    private ViewPager vp_topic;
+    @ViewInject(R.id.tabs_topic)
+    private TabLayout tabs_topic;
+    private String[] mTitleList = {"最新", "最热"};//页卡标题集合
 
-    public static final JokeFragment getInstance() {
-        JokeFragment fragment = new JokeFragment();
+    public static final TopicFragment getInstance() {
+        TopicFragment fragment = new TopicFragment();
         return fragment;
     }
 
@@ -42,12 +43,12 @@ public class JokeFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(JokeImageFragment.getInstance());
-        fragments.add(JokeImageFragment.getInstance());
+        fragments.add(NewTopicFragment.newInstance());
+        fragments.add(HotTopicFragment.newInstance());
 
-        JokeViewPagerAdapter mAdapter = new JokeViewPagerAdapter(getFragmentManager(), fragments, mTitleList);
-        vp_joke.setAdapter(mAdapter);//给ViewPager设置适配器
-        tabs_joke.setupWithViewPager(vp_joke);//将TabLayout和ViewPager关联起来。
+        TopicViewPagerAdapter mAdapter = new TopicViewPagerAdapter(getFragmentManager(), fragments, mTitleList);
+        vp_topic.setAdapter(mAdapter);//给ViewPager设置适配器
+        tabs_topic.setupWithViewPager(vp_topic);//将TabLayout和ViewPager关联起来。
 
     }
 

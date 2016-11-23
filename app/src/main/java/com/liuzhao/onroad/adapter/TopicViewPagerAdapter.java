@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Created by liuzhao on 2016/8/30.
  */
-public class JokeViewPagerAdapter extends FragmentPagerAdapter {
+public class TopicViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments;
     private String[] mTitleList;
 
-    public JokeViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] mTitleList) {
+    public TopicViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] mTitleList) {
         super(fm);
         this.fragments = fragments;
         this.mTitleList = mTitleList;

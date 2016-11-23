@@ -14,16 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
+import com.liuzhao.onroad.fragment.FavoriteFragment;
 import com.liuzhao.onroad.fragment.HomePageFragment;
-import com.liuzhao.onroad.fragment.JokeFragment;
-import com.liuzhao.onroad.fragment.PictureInfoFragment;
+import com.liuzhao.onroad.fragment.MessageFragment;
+import com.liuzhao.onroad.fragment.TopicFragment;
 import com.liuzhao.onroad.util.Utils;
 
 import org.xutils.image.ImageOptions;
@@ -122,6 +121,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        Utils.showMyToast("分享");
         return super.onOptionsItemSelected(item);
     }
 
@@ -134,14 +134,14 @@ public class MainActivity extends BaseActivity
             case R.id.nav_home:
                 fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
                 break;
-            case R.id.nav_text:
-                fragmentTransaction.replace(R.id.fra_layout, JokeFragment.getInstance()).commit();
+            case R.id.nav_topic:
+                fragmentTransaction.replace(R.id.fra_layout, TopicFragment.getInstance()).commit();
                 break;
-            case R.id.nav_picture:
-                fragmentTransaction.replace(R.id.fra_layout, PictureInfoFragment.getInstance()).commit();
+            case R.id.nav_favorite:
+                fragmentTransaction.replace(R.id.fra_layout, FavoriteFragment.newInstance()).commit();
                 break;
-            case R.id.nav_audio:
-                fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
+            case R.id.nav_message:
+                fragmentTransaction.replace(R.id.fra_layout, MessageFragment.getInstance()).commit();
                 break;
             case R.id.nav_send:
                 Utils.showMyToast("跳转到反馈页");

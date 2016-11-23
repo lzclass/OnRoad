@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liuzhao.onroad.R;
-import com.liuzhao.onroad.activity.BaseActivity;
-import com.liuzhao.onroad.activity.RoadApp;
 import com.liuzhao.onroad.entity.DayWordData;
 import com.liuzhao.onroad.entity.DayWordResult;
 import com.liuzhao.onroad.myinterface.NetResultCallBack;
@@ -16,10 +14,8 @@ import com.liuzhao.onroad.net.NetCommonCallback;
 import com.liuzhao.onroad.net.NetConstants;
 import com.liuzhao.onroad.net.NetManager;
 import com.liuzhao.onroad.util.DateUtils;
-import com.liuzhao.onroad.util.JsonUtils;
 
 import org.xutils.common.Callback;
-import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -30,8 +26,6 @@ import java.util.HashMap;
 public class HomePageFragment extends BaseFragment {
     @ViewInject(R.id.iv_home_content)
     private ImageView iv_home_content;
-    @ViewInject(R.id.tv_pic_no)
-    private TextView tv_pic_no;
     @ViewInject(R.id.tv_pic_author)
     private TextView tv_pic_author;
     @ViewInject(R.id.tv_home_content)
@@ -40,7 +34,6 @@ public class HomePageFragment extends BaseFragment {
     private TextView tv_home_author;
     @ViewInject(R.id.tv_date)
     private TextView tv_date;
-    private String date;
 
     public HomePageFragment() {
         // Required empty public constructor
@@ -62,11 +55,10 @@ public class HomePageFragment extends BaseFragment {
     }
 
     private void initDate(DayWordData data) {
-//        tv_pic_no.setText("DALIY_" + DateUtils.formatDate(data.getDateTime()));
-        tv_pic_author.setText(data.getAuthor());
+        tv_pic_author.setText(data.getImageAuthor());
         tv_home_content.setText(data.getContent());
-        tv_home_author.setText(data.getAuthor());
-        tv_date.setText(data.getDateTime());
+        tv_home_author.setText("by "+data.getTextAuthor());
+        tv_date.setText(DateUtils.DateToWeek(DateUtils.StringToDate(data.getDateTime())) + " " + data.getDateTime());
 
         x.image().bind(iv_home_content, data.getImageUrl(), new Callback.CommonCallback<Drawable>() {
             @Override

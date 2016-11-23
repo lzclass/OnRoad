@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * Created by liuzhao on 2016/3/1.
  */
-public class JokeListAdapter extends BaseListAdapter<JokeBean> {
-    public JokeListAdapter(Context context, List<JokeBean> values) {
+public class FavoriteListAdapter extends BaseListAdapter<JokeBean> {
+    public FavoriteListAdapter(Context context, List<JokeBean> values) {
         super(context, values);
     }
 

@@ -1,4 +1,5 @@
 package com.liuzhao.onroad.util;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -188,11 +189,7 @@ public class DateUtils {
             date = sdf.parse(time);
             long t = date.getTime();
             long round = System.currentTimeMillis();
-            if (t - round > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return t - round > 0;
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -208,11 +205,7 @@ public class DateUtils {
      */
     public static boolean judgeCurrTime(long time) {
         long round = System.currentTimeMillis();
-        if (time - round > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return time - round > 0;
     }
 
     /**
@@ -230,11 +223,7 @@ public class DateUtils {
             //获取秒数作比较
             long l1 = date1.getTime() / 1000;
             long l2 = date2.getTime() / 1000;
-            if (l2 - l1 > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return l2 - l1 > 0;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -252,6 +241,7 @@ public class DateUtils {
         String date = sdf.format(time * 1000);
         return date;
     }
+
     /**
      * 得到日期 yyyyMMdd
      *
@@ -390,8 +380,8 @@ public class DateUtils {
 
     public static final int WEEKDAYS = 7;
     //星期字符数组
-    public static String[] WEEK = {"周日", "周一", "周二", "周三",
-            "周四", "周五", "周六"};
+    public static String[] WEEK = {"Sun", "Mon", "Tue", "Wed",
+            "Thu", "Fri", "Sat"};
 
     public static String DateToWeek(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -403,4 +393,15 @@ public class DateUtils {
         return WEEK[dayIndex - 1];
     }
 
+    public static Date StringToDate(String strDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+        Date date = null;
+        try {
+            date = sdf.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            date = new Date();
+        }
+        return date;
+    }
 }

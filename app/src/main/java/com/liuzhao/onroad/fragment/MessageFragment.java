@@ -7,6 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.liuzhao.onroad.R;
+import com.liuzhao.onroad.adapter.RvAdapter;
 import com.liuzhao.onroad.entity.Article;
 import com.liuzhao.onroad.view.RecyclerViewHeader;
 
@@ -20,8 +21,8 @@ import java.util.List;
  * @author liuzhao
  * @date 2015-12-8下午3:37:46
  */
-@ContentView(R.layout.fragment_story)
-public class StoryFragment extends BaseFragment {
+@ContentView(R.layout.fragment_message)
+public class MessageFragment extends BaseFragment {
     private List<Article> list;
     @ViewInject(R.id.header)
     private RecyclerViewHeader mRecyclerHeader;
@@ -30,8 +31,8 @@ public class StoryFragment extends BaseFragment {
     private RvAdapter rvAdapter;
 
 
-    public static final StoryFragment getInstance() {
-        StoryFragment fragment = new StoryFragment();
+    public static final MessageFragment getInstance() {
+        MessageFragment fragment = new MessageFragment();
         return fragment;
     }
 

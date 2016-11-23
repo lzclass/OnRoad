@@ -7,17 +7,17 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="首页" />
         <item
-            android:id="@+id/nav_text"
+            android:id="@+id/nav_topic"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="文字" />
+            android:title="话题" />
         <item
-            android:id="@+id/nav_picture"
+            android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="图片" />
+            android:title="收藏" />
         <item
-            android:id="@+id/nav_audio"
+            android:id="@+id/nav_message"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="音乐" />
+            android:title="消息" />
 
 
     </group>
