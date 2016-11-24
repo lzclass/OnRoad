@@ -8,11 +8,11 @@ public interface SharePreferenceContants {
      * @description 用于USER的key
      */
     interface USER_INFO {
-        String USER_TOKEN = "token";// 用户token,String型
-        String USER_NAME = "userName";// 用户名，String型
+        String USER_TOKEN = "access_token";// 用户token,String型
+        String LOGIN_NAME = "loginName";// 用户名，String型
+        String NICK_NAME = "nickName";// 昵称，String型
         String USER_PHONE = "userMobile";// 用户手机号，String型
         String USER_HEADER_PIC = "userHeaderPic";// 用户头像，String型
-        String VALUE_NO_LOGIN = "no_login";// 用户未登入,token的默认值
         String USER_SEX = "sex";// 用户性别，int型
         String USER_ID = "user_id";// 用户id,int型
     }

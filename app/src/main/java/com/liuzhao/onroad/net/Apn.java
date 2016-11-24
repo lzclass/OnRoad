@@ -104,7 +104,7 @@ public class Apn implements SharePreferenceContants {
 
     public static HashMap<String, String> addHeads(HashMap<String, String> map) {
         String token = SharePreferenceUtil.USER.getString(USER_INFO.USER_TOKEN,
-                USER_INFO.VALUE_NO_LOGIN);
+                "");
         map.put("token", token);// 单点登录唯一识别
         map.put("version", version);// 版本号
         map.put("iMei", imei);// 手机串号

@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity
     private NavigationView nav_view;
     private RelativeLayout rl_head;
     private Toolbar toolbar;
+    private int selected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +112,11 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // 头部标题右侧
-        getMenuInflater().inflate(R.menu.main, menu);
+        if (selected == 0) {
+            getMenuInflater().inflate(R.menu.main, menu);
+        } else if (selected == 1){
+            getMenuInflater().inflate(R.menu.topic, menu);
+        }
         return true;
     }
 
@@ -119,9 +124,9 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Utils.showMyToast("分享");
             return true;
         }
-        Utils.showMyToast("分享");
         return super.onOptionsItemSelected(item);
     }
 
@@ -133,15 +138,19 @@ public class MainActivity extends BaseActivity
         switch (item.getItemId()) {
             case R.id.nav_home:
                 fragmentTransaction.replace(R.id.fra_layout, HomePageFragment.getInstance()).commit();
+                selected = 0;
                 break;
             case R.id.nav_topic:
                 fragmentTransaction.replace(R.id.fra_layout, TopicFragment.getInstance()).commit();
+                selected = 1;
                 break;
             case R.id.nav_favorite:
                 fragmentTransaction.replace(R.id.fra_layout, FavoriteFragment.newInstance()).commit();
+                selected = 2;
                 break;
             case R.id.nav_message:
                 fragmentTransaction.replace(R.id.fra_layout, MessageFragment.getInstance()).commit();
+                selected = 3;
                 break;
             case R.id.nav_send:
                 Utils.showMyToast("跳转到反馈页");
@@ -151,6 +160,7 @@ public class MainActivity extends BaseActivity
                 break;
 
         }
+        MainActivity.this.invalidateOptionsMenu();
         //关闭左边菜单
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

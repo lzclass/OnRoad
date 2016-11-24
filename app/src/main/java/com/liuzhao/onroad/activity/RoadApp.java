@@ -61,7 +61,7 @@ public class RoadApp extends Application implements SharePreferenceContants {
                     result.getToken());
         }
         // 记录用户其他必要信息
-        SharePreferenceUtil.USER.setString(USER_INFO.USER_NAME,
+        SharePreferenceUtil.USER.setString(USER_INFO.LOGIN_NAME,
                 result.getName());
         SharePreferenceUtil.USER.setString(USER_INFO.USER_PHONE,
                 result.getMobile());
@@ -75,10 +75,8 @@ public class RoadApp extends Application implements SharePreferenceContants {
      * 清空用户信息,用于登出
      */
     public void clearUserInfo() {
-        SharePreferenceUtil.USER.setString(USER_INFO.USER_TOKEN,
-                USER_INFO.VALUE_NO_LOGIN);
         // 记录用户其他必要信息
-        SharePreferenceUtil.USER.deleteString(USER_INFO.USER_NAME);
+        SharePreferenceUtil.USER.deleteString(USER_INFO.LOGIN_NAME);
         // 增加了记住手机号功能，手机号在登出时不清空
         // SharePreferenceUtil.USER.deleteString(USER_INFO.USER_PHONE);
         SharePreferenceUtil.USER.deleteString(USER_INFO.USER_HEADER_PIC);

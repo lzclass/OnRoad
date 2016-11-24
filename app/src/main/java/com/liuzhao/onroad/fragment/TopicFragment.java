@@ -23,11 +23,6 @@ import java.util.List;
  */
 @ContentView(R.layout.fragment_topic)
 public class TopicFragment extends BaseFragment {
-    @ViewInject(R.id.vp_topic)
-    private ViewPager vp_topic;
-    @ViewInject(R.id.tabs_topic)
-    private TabLayout tabs_topic;
-    private String[] mTitleList = {"最新", "最热"};//页卡标题集合
 
     public static final TopicFragment getInstance() {
         TopicFragment fragment = new TopicFragment();
@@ -42,13 +37,6 @@ public class TopicFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(NewTopicFragment.newInstance());
-        fragments.add(HotTopicFragment.newInstance());
-
-        TopicViewPagerAdapter mAdapter = new TopicViewPagerAdapter(getFragmentManager(), fragments, mTitleList);
-        vp_topic.setAdapter(mAdapter);//给ViewPager设置适配器
-        tabs_topic.setupWithViewPager(vp_topic);//将TabLayout和ViewPager关联起来。
 
     }
 

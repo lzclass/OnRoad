@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.liuzhao.onroad.R;
 import com.liuzhao.onroad.common.SharePreferenceContants;
 import com.liuzhao.onroad.util.SharePreferenceUtil;
+import com.liuzhao.onroad.util.StringUtils;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -149,9 +150,7 @@ public class MainSplashActivity extends BaseActivity {
                 case ANIMATION_END_MSG:
                     Intent intent = new Intent();
                     // 根据登陆的token来判断进入哪个页面
-                    if (SharePreferenceUtil.USER.getString(SharePreferenceContants.USER_INFO.USER_TOKEN,
-                            SharePreferenceContants.USER_INFO.VALUE_NO_LOGIN).equals(
-                            SharePreferenceContants.USER_INFO.VALUE_NO_LOGIN)) {
+                    if (StringUtils.isNullOrEmpty(SharePreferenceUtil.USER.getString(SharePreferenceContants.USER_INFO.USER_TOKEN,""))){
                         // 没有token，进入登陆页面
                         intent.setClass(ref.get(), LoginActivity.class);
                     } else {
