@@ -243,13 +243,13 @@ public class DateUtils {
     }
 
     /**
-     * 得到日期 yyyyMMdd
+     * 得到日期 yyyy-MM-dd
      *
      * @param dateTime
      * @return
      */
     public static String formatDate(String dateTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(dateTime);
         return date;
     }
@@ -380,8 +380,8 @@ public class DateUtils {
 
     public static final int WEEKDAYS = 7;
     //星期字符数组
-    public static String[] WEEK = {"Sun", "Mon", "Tue", "Wed",
-            "Thu", "Fri", "Sat"};
+    public static String[] WEEK = {"周日", "周一", "周二", "周三",
+            "周四", "周五", "周六"};
 
     public static String DateToWeek(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -394,7 +394,7 @@ public class DateUtils {
     }
 
     public static Date StringToDate(String strDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟,大写的是月
         Date date = null;
         try {
             date = sdf.parse(strDate);
@@ -403,5 +403,22 @@ public class DateUtils {
             date = new Date();
         }
         return date;
+    }
+    /**
+     * 获取简单农历对象
+     * @param date 日期字符串
+     * @return 简单农历对象
+     */
+    public static SimpleLunarCalendar getSimpleLunarCalendar(String date) {
+        return new SimpleLunarCalendar(StringToDate(date));
+    }
+
+    /**
+     * 获取简单农历对象
+     * @param date 日期
+     * @return 简单农历对象
+     */
+    public static SimpleLunarCalendar getSimpleLunarCalendar(Date date) {
+        return new SimpleLunarCalendar(date);
     }
 }

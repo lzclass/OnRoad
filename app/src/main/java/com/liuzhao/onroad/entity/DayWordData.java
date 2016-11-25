@@ -11,15 +11,15 @@ public class DayWordData implements Serializable {
     private String dateTime;
     private String content;
     private String textAuthor;
-    private String ImageAuthor;
+    private String imageAuthor;
     private String imageUrl;
 
     public String getImageAuthor() {
-        return ImageAuthor;
+        return imageAuthor;
     }
 
     public void setImageAuthor(String imageAuthor) {
-        ImageAuthor = imageAuthor;
+        this.imageAuthor = imageAuthor;
     }
 
     public String getId() {
@@ -31,6 +31,8 @@ public class DayWordData implements Serializable {
     }
 
     public String getDateTime() {
+        if (dateTime==null)
+            dateTime="";
         return dateTime;
     }
 

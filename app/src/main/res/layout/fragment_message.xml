@@ -4,25 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.liuzhao.onroad.view.RecyclerViewHeader
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/recycler_divider_width"
-        android:background="@drawable/round_background_green">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="sans-serif-light"
-            android:text="header"
-            android:textColor="@color/clouds"
-            android:textSize="20sp" />
-
-    </com.liuzhao.onroad.view.RecyclerViewHeader>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_below="@+id/header"

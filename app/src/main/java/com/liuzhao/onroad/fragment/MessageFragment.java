@@ -2,6 +2,7 @@ package com.liuzhao.onroad.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -24,8 +25,6 @@ import java.util.List;
 @ContentView(R.layout.fragment_message)
 public class MessageFragment extends BaseFragment {
     private List<Article> list;
-    @ViewInject(R.id.header)
-    private RecyclerViewHeader mRecyclerHeader;
     @ViewInject(R.id.recycler)
     private RecyclerView mRecycler;
     private RvAdapter rvAdapter;
@@ -55,10 +54,7 @@ public class MessageFragment extends BaseFragment {
 
     private void initView() {
         // 创建一个线性布局管理器
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        // 创建矩形布局管理器
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,
-                StaggeredGridLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         // 设置布局管理器
         mRecycler.setLayoutManager(layoutManager);
 
@@ -68,7 +64,6 @@ public class MessageFragment extends BaseFragment {
         }
         rvAdapter = new RvAdapter(getActivity(), list);
         mRecycler.setAdapter(rvAdapter);
-        mRecyclerHeader.attachTo(mRecycler, true);
         // 设置item动画
         mRecycler.setItemAnimator(new DefaultItemAnimator());
     }

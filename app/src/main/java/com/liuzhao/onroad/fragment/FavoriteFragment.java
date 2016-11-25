@@ -33,7 +33,6 @@ public class FavoriteFragment extends BaseFragment {
     private int page = 1;
     private int pageSize = 10;
     private String time;
-    private ViewPager vp_joke;
 
     public static final FavoriteFragment newInstance() {
         FavoriteFragment fragment = new FavoriteFragment();
@@ -57,6 +56,7 @@ public class FavoriteFragment extends BaseFragment {
             public void onRefresh() {
                 page = 1;
                 getData();
+                mSwipeLayout.setRefreshing(false);
             }
         });
     }
