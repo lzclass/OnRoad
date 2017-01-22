@@ -71,7 +71,7 @@ public class MainSplashActivity extends BaseActivity {
                 getString(R.string.app_name));
         shortcut.putExtra("duplicate", false);
         Intent.ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(
-                this, R.drawable.ic_drawer);
+                this, R.mipmap.ic_drawer);
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes);
         Intent respondIntent = new Intent(this, this.getClass());
         respondIntent.setAction(Intent.ACTION_MAIN);
